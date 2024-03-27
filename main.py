@@ -4,6 +4,9 @@ import math
 
 from subprocess import Popen, PIPE, STDOUT
 
+# Number of points to generate
+n = 1000
+
 ptsIn, ptsTotal = 0, 0
 x, y = [], []
 
@@ -17,20 +20,20 @@ ax.add_patch(patches.Rectangle((-1, -1), 2, 2, edgecolor='black', facecolor='non
 ax.add_patch(patches.Circle((0,0), 1, edgecolor='black', facecolor='none'))
 
 # Get random numbers from `./rng`
-rng = Popen('./rng', stdout=PIPE, stderr=STDOUT, shell=True)
+rng = Popen(['./rng', '-n', f'{n*2}'], stdout=PIPE, stderr=STDOUT)
 
 while True:
     val = rng.stdout.readline()
     if not val: break
     x.append(float(val))
+    print(val)
     
     val = rng.stdout.readline()
     if not val: break
     y.append(float(val))
 
-
 # Plot points, red if in the circle, blue if outside the circle
-for j in range(500000):
+for j in range(n):
     if (math.sqrt((x[j]**2)+(y[j]**2)) < 1):
         plt.scatter(x[j], y[j], color='red')
         ptsIn = ptsIn + 1
