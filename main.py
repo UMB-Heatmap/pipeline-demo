@@ -30,7 +30,7 @@ while True:
 
 
 # Plot points, red if in the circle, blue if outside the circle
-for j in range(1000):
+for j in range(500000):
     if (math.sqrt((x[j]**2)+(y[j]**2)) < 1):
         plt.scatter(x[j], y[j], color='red')
         ptsIn = ptsIn + 1
